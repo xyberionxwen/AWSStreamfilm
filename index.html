@@ -16,7 +16,7 @@
             <a href="index.html" class="logo">AWStream</a>
         
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        
+
             <ul class="nav-links" id="navLinks">
               <li><a href="index.html">Beranda</a></li>
               <li><a href="#movies">Film</a></li>
@@ -448,10 +448,27 @@
     </footer>
 
     <script>
-          function toggleMenu() {
-    const nav = document.querySelector('.nav-links');
-    nav.classList.toggle('show');
-  }
+        function toggleMenu() {
+  const navLinks = document.getElementById("navLinks");
+  navLinks.classList.toggle("show");
+}
+
+let lastScrollTop = 0;
+  const navbar = document.querySelector("header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      // Scroll ke bawah -> sembunyikan navbar
+      navbar.classList.add("hide-navbar");
+    } else {
+      // Scroll ke atas -> tampilkan navbar
+      navbar.classList.remove("hide-navbar");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Menghindari nilai negatif
+  });
 
 function openMovie(element) {
   const title = element.dataset.title;

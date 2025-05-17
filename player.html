@@ -35,7 +35,6 @@
   <header>
     <nav class="navbar">
       <a href="index.html" class="logo">AWStream</a>
-  
       <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   
       <ul class="nav-links" id="navLinks">
@@ -71,6 +70,29 @@
     <a href="index.html" class="back-button">← Kembali ke Beranda</a>
   </div>
 <script>
+
+function toggleMenu() {
+  const navLinks = document.getElementById("navLinks");
+  navLinks.classList.toggle("show");
+}
+
+let lastScrollTop = 0;
+  const navbar = document.querySelector("header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      // Scroll ke bawah -> sembunyikan navbar
+      navbar.classList.add("hide-navbar");
+    } else {
+      // Scroll ke atas -> tampilkan navbar
+      navbar.classList.remove("hide-navbar");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Menghindari nilai negatif
+  });
+
 const urlParams = new URLSearchParams(window.location.search);
 
 const title = urlParams.get('title');
